@@ -10,7 +10,7 @@ A pure PHP script that creates and remotely stores an encrypted .sql export file
 
 ## Usage
 
-Upon triggering with cron, the script will export the selected database tables to a .sql file, encrypt the file using mcrypt, and connect securely to a remote server to store the encrypted backup file.
+Upon triggering with cron, the script will export the selected database tables to a .sql file, encrypt the file using a key, and connect securely to a remote server to store the encrypted backup file.
 
 Limited error handling. Not tested with huge databases. Use at your own risk.
 
@@ -18,7 +18,7 @@ Decrypt the exported file using phpdbdecrypt.php and setting the encryption key 
 
 ## Requirements
 
-PHP 5.4 minimum, with mcrypt and mysqli.
+PHP 5.4 minimum, with mysqli.
 
 ## Tips
 
@@ -27,6 +27,7 @@ PHP 5.4 minimum, with mcrypt and mysqli.
 - Suited to be run in shared cPanel hosting environments but should run almost anywhere.
 - Script can be run hourly or more often for minute by minute database backups.
 - Garbage collection needs to be performed on the remote server, the script doesn't handle this automatically.
+- Encryption mode and cipher can be changed/improved following http://phpseclib.sourceforge.net/crypt/examples.html
 
 ## Credits
 

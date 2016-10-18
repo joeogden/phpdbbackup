@@ -5,15 +5,14 @@
 		// Include files
 		include("phpdbconfig.php");
 		include('phpseclib/Net/SFTP.php');
+		include('phpseclib/Crypt/Rijndael.php');
 	
-		// Function to encrypt the export
+		// Function to encrypt the export, uses phpseclib
 		function encryptData($value){
 			global $key;
-			$text = $value;
-			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
-			$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-			$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $text, MCRYPT_MODE_ECB, $iv);
-			return $crypttext;
+      $cipher = new Crypt_Rijndael(CRYPT_RIJNDAEL_MODE_ECB);
+			$cipher->setKey($key);
+			return $cipher->encrypt($value);
 		}
 
     // Set the date for filename, this is designed for hourly backups but could also include minutes
